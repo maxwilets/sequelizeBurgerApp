@@ -1,0 +1,96 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col l6 m-12 s12 push-l3'>
+            <h1>Eat-Da-Burger</h1>
+        </div>
+    </div>
+    <br />
+    <div class='row'>
+        <div class='col l8 s8 push-l4 push-s2'>
+            <img src='/assets/img/burger.PNG'>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class='col s4'>
+            <ol>
+                <h4>Burgers to Devour</h4>
+                <hr>
+                <!--loop to populate the undevoured burgers in an unordered list-->
+                {{#each burgers}} {{#unless this.devoured}}
+                <li class='burgy'>
+                    <div>
+                    <p class='burgy'>
+                         <h5>{{this.burger_name}}</h5> 
+                         <form method="POST" action='/api/dogs/{{this.id}}?_method=PUT' class='button-size' >
+						<input type="hidden" type="text" name="burger_id" value={{this.id}}><br>
+						{{!-- enter eater name here --}}
+						<input class="my-1" type="text" name="customer"  placeholder="Customer"><br>
+						<button type="submit" class="btn btn-default red eat">eat</button>
+					</form>
+                       
+                        </form>
+                    </p>
+                    </div>
+                </li>
+
+                {{/unless}} {{/each}}
+            </ol>
+        </div>
+
+        <div class='col s4 push-l4 push-s2'>
+            <ol>
+                
+                <h4>Burgers Devoured</h4>
+                <hr>
+                <!-- loop to populate the devoured burgers list-->
+                {{#each burgers}} {{#if this.devoured}}
+                <li class= 'burgy'>
+                   <p class='burgy'><h5>{{this.burger_name}}</h5>
+                    Eaten by {{this.Customer.dataValues.customer_name}}
+                   <!-- <input class="form-control" type="text" placeholder="{{this.id}}. {{this.burger_name}}. Eaten by {{this.Customer.dataValues.customer_name}}" readonly>-->
+                </li>
+                {{/if}}{{/each}}
+            </ol>
+        </div>
+    </div>
+    <!--thebutton for the add burger form has a POST method-->
+    <div class= 'container'>
+        <div class='col s6 push 3'>
+      <form action="/api/burgers" method='POST'>
+    <div class="input-field">
+   
+
+     <button class="subs btn waves-effect waves-light red" type="submit" name="action">Add
+    <i class="material-icons">add</i>
+  </button>
+    
+      <div class="file-path-wrapper">
+        <input type='text' id = 'name' name='burger_name'class=" validate red"  placeholder="Add a Burger to Eat">
+      </div>
+    </div>
+  </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+  // $('.eat').on("click", function (event) {
+            //sets the devoured state to true
+            //the button has a datatype matching the ID in the database
+   //         var id = $(this).data('id');
+     //       var name = $('.customer').val()
+      //      console.log(name)      
+      //      console.log($(this))   
+            //leads to the AJAX call to update the burger
+      //      $.ajax('/api/burgers/'+name, {
+      //          type: "PUT",
+      //          id: id,
+      //          name: name
+      //      }).then(
+               // location.reload()
+        //    )
+        //})
+
+</script>
